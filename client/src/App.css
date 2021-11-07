@@ -48,6 +48,7 @@ html {
   padding-top: 0.12em;
 }
 .pass-item div {
+  transition: 0.1s;
   background-color: #282c34;
   color: #bbbec9;
   font-weight: lighter;
@@ -55,6 +56,16 @@ html {
   text-align: center;
   border-radius: 10px;
   cursor: copy;
+}
+.pass-item:active {
+  transition: 0.2s;
+  background-color: #bbbec9;
+  content: "copied";
+  color: #282c34;
+}
+.pass-item div:active{
+  transition: 0.1s;
+  background-color: #bbbec9;
 }
 
 @keyframes show {
