@@ -52,6 +52,9 @@ function App() {
     let [symbol, setSymbol] = useState(false)
     let [repeat, setRepeat] = useState(true)
     let [passwords, setPasswords] = useState({})
+    const [toggleCard, setToggleCard] = useState(false)
+    const [resizeInfo, setResizeInfo] = useState(false)
+    const [displayPass, setDisplayPass] = useState(false)
 
     const settings = {
         length: passLength,
@@ -66,16 +69,18 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <div className="App-card">
+                <div className={toggleCard ? `App-card-active` : `App-card`}>
                     <div className="container">
                         <div className="row">
-                            <Form className="col-md-4">
+                            <Form className={resizeInfo ? 'col-md-4 col-sm-12' : 'col-md-10 col-sm-12'}>
                                 <Form.Group className="mb-1" controlId="dig">
                                     <Form.Label>Длинна пароля: {passLength}</Form.Label>
-                                    <Form.Range min="1" max="32" defaultValue="8"
-                                                onChange={(e) => {
-                                                    setPassLength(passLength = e.target.value)
-                                                }}/>
+                                    <div className="range">
+                                        <Form.Range min="1" max="32" defaultValue="8"
+                                                    onChange={(e) => {
+                                                        setPassLength(passLength = e.target.value)
+                                                    }}/>
+                                    </div>
                                 </Form.Group>
                                 <Form.Group className="mb-1 mt-4" controlId="uc_en">
                                     <Form.Check className="ml-3" type="checkbox" label="Латиница: заглавные"
@@ -124,17 +129,29 @@ function App() {
                                         async () => {
                                             let res = await getPasswords(settings)
                                             setPasswords(passwords = displayPasswords(res))
+
+                                            setToggleCard(true)
+                                            setTimeout(() => {
+                                                setResizeInfo(true)
+
+                                            }, 300)
+                                            setTimeout(() => {
+
+                                                setDisplayPass(true)
+                                            }, 500)
                                         }
                                     }>Сгенерировать</Button>
                                 </Form.Group>
                             </Form>
-                            <div className="col-md-2"> </div>
-                            <div className="col-md-6">
+                            <div className="col-md-2 col-sm-12"><br/> </div>
+                            <div className={displayPass ? "col-md-6 col-sm-12" : "hidden"}>
                                 {Object.keys(passwords).map(item => {
+
                                     let item_id = `item__${item}`;
-                                        return <ClipboardCopy _id={item_id} content={passwords[item]}/>
+                                        return <ClipboardCopy item={item} _id={item_id} content={passwords[item]}/>
 
                                 })}
+
                             </div>
                         </div>
                     </div>
