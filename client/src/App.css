@@ -1,0 +1,70 @@
+::-webkit-scrollbar {
+  width: 0;
+}
+
+html {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.App {
+
+}
+.App-card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60vh;
+  width: 60%;
+  background-color: #474d56;
+  padding-left: 30px;
+  border-radius: 20px;
+  font-weight: lighter;
+}
+
+
+.App-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  font-size: calc(5px + 2vmin);
+  color: white;
+}
+
+.pass-item {
+  animation: show 0.2s 1;
+  animation-fill-mode: backwards;
+  transform: translateX(0);
+  display: flex;
+  justify-content: space-between;
+  font-weight: normal;
+  font-family: sans-serif;
+  color: #e0e0e5;
+  background-color: #31373f;
+  border-radius: 10px;
+  min-height: 4.5vh;
+  padding-left: 5%;
+  padding-top: 0.12em;
+}
+.pass-item div {
+  background-color: #282c34;
+  color: #bbbec9;
+  font-weight: lighter;
+  width: 3em;
+  text-align: center;
+  border-radius: 10px;
+  cursor: copy;
+}
+
+@keyframes show {
+  0% {
+    transform: translateX(500px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
