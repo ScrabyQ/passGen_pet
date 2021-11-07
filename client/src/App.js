@@ -1,7 +1,10 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {Form, Button} from 'react-bootstrap'
 import {useState} from "react";
+
+import { ClipboardCopy } from "./modules/ClipboardCopy"
 
 async function getPasswords(settings) {
 
@@ -125,13 +128,12 @@ function App() {
                                     }>Сгенерировать</Button>
                                 </Form.Group>
                             </Form>
-                            <div className="col-md-2"></div>
+                            <div className="col-md-2"> </div>
                             <div className="col-md-6">
                                 {Object.keys(passwords).map(item => {
                                     let item_id = `item__${item}`;
-                                        return <div className="pass-item mb-2" id={item_id}> {passwords[item]}
-                                            <div>copy</div>
-                                        </div>
+                                        return <ClipboardCopy _id={item_id} content={passwords[item]}/>
+
                                 })}
                             </div>
                         </div>
