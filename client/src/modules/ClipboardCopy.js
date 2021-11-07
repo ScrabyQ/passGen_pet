@@ -23,7 +23,10 @@ import { useState } from "react";
 
     }
     return (
-        <div className="pass-item mb-2" id={props._id}> {props.content}<div onClick={() => { clickHandle() }}>{isCopied ? "copied" : "copy"}</div> </div>
+
+        <div className={props.item === '9' || props.item === '0'  ? "pass-item" : "pass-item mb-1 mt-1"} id={props._id}> {props.content}<div onClick={() => { clickHandle() }}>{isCopied ? "copied" : "copy"}</div> </div>
+
+
     )
 }
 
