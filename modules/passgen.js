@@ -3,7 +3,7 @@ module.exports = class Passwd {
     _UPPER_ENG = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     _LOWER_RU = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
     _UPPER_RU = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
-    _SYMBOLS = '!@#$%-'
+    _SYMBOLS = `!@#$%-^&*()_+~"№;%:?=[]{}\|/,.\'<>`
     _DIGIT = '0123456789'
 
     constructor(length) {
@@ -23,14 +23,14 @@ module.exports = class Passwd {
 
     generate(settings) {
         let pass = "";
-        const {LC_EN, LC_RU, UC_EN, UC_RU, symbols, digit, dont_repeat} = settings
+        const {LC_EN, LC_RU, UC_EN, UC_RU, symbol, digit, repeat} = settings
         const char_set =
-            `${LC_EN ? this._LOWER_ENG : ""}${LC_RU ? this._LOWER_RU : ""}${UC_EN ? this._UPPER_ENG : ""}${UC_RU ? this._UPPER_RU : ""}${symbols ? this._SYMBOLS : ""}${digit ? this._DIGIT : ""}`
+            `${LC_EN ? this._LOWER_ENG : ""}${symbol ? this._SYMBOLS : ""}${LC_RU ? this._LOWER_RU : ""}${symbol ? this._SYMBOLS : ""}${UC_EN ? this._UPPER_ENG : ""}${UC_RU ? this._UPPER_RU : ""}${symbol ? this._SYMBOLS : ""}${digit ? this._DIGIT : ""}`
                 .split("")
 
         while (pass.length !== this._length) {
             let index = Math.floor(Math.random() * char_set.length)
-            if (dont_repeat && pass.indexOf(char_set[index].toLowerCase()) !== -1) {
+            if (!repeat && pass.indexOf(char_set[index].toLowerCase()) !== -1) {
                 continue
             } else {
                 pass += char_set[index]
